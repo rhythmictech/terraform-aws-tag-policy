@@ -1,57 +1,49 @@
 # basic example
-A basic example for this repository
 
-## Code
-Look to [main.tf](./main.tf), or be helpful and copy/paste that code here.
+This example defines a tag policy for Environment, Project, and Owner tags. The following tag policy is produced and attached to the organization:
 
-## Applying
 ```
->  terraform apply
-
-Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-example = {
-  "tags_module" = {
-    "name" = "TEST"
-    "name32" = "TEST"
-    "name6" = "TEST"
-    "namenosymbols" = "TEST"
-    "tags" = {
-      "Name" = "TEST"
-      "terraform_managed" = true
-      "terraform_module" = "terraform-terraform-tags-1.0.0"
-      "terraform_root_module" = "."
-      "terraform_workspace" = "default"
-    }
-    "tags_as_list_of_maps" = [
-      {
-        "key" = "Name"
-        "value" = "TEST"
+{
+  "tags": {
+    "Environment": {
+      "enforced_for": {
+        "@@assign": [
+          "ec2:instance",
+          "s3:bucket"
+        ]
       },
-      {
-        "key" = "terraform_managed"
-        "value" = true
+      "tag_key": {
+        "@@assign": "Environment"
       },
-      {
-        "key" = "terraform_module"
-        "value" = "terraform-terraform-tags-1.0.0"
+      "tag_value": {
+        "@@assign": [
+          "Production",
+          "Staging",
+          "Development"
+        ]
+      }
+    },
+    "Project": {
+      "enforced_for": {
+        "@@assign": [
+          "ec2:instance",
+          "s3:bucket",
+          "rds:db"
+        ]
       },
-      {
-        "key" = "terraform_root_module"
-        "value" = "."
+      "tag_key": {
+        "@@assign": "Project"
+      }
+    },
+    "Owner": {
+      "enforced_for": {
+        "@@assign": [
+          "*"
+        ]
       },
-      {
-        "key" = "terraform_workspace"
-        "value" = "default"
-      },
-    ]
-    "tags_no_name" = {
-      "terraform_managed" = true
-      "terraform_module" = "terraform-terraform-tags-1.0.0"
-      "terraform_root_module" = "."
-      "terraform_workspace" = "default"
+      "tag_key": {
+        "@@assign": "Owner"
+      }
     }
   }
 }
