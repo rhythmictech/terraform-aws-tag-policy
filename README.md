@@ -28,7 +28,7 @@ module "example" {
 ## About
 This module creates a tag policy in AWS Organizations. It can be attached to the organization or to a list of OUs. It is possible to attach multiple tag policies to an organization or OU by using this module multiple times. 
 
-This module supports inheritance of tag policies. It uses the `@@assign` operator by default, so the effective tag policy will be the union of all tag policies attached to an organization or OU. It is possible to use the `@@append` and `@@remove` operators to modify the tag policy, as well as to define child inheritence rules. Thus, 
+This module supports inheritance of tag policies. It uses the `@@assign` operator by default, so the effective tag policy will be the union of all tag policies attached to an organization or OU. It is possible to use the `@@append` and `@@remove` operators to modify the tag policy, as well as to define child inheritance rules. Thus, 
 
 Rolling out a tag policy in a running environment can cause unexpected results. Be sure to test in a dedicated AWS account and roll out carefully. Consult AWS documentation:
 

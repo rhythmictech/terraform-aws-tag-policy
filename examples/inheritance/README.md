@@ -1,4 +1,4 @@
-# inheritence example
+# inheritance example
 
 This example defines a tag policy for Environment and Owner tags, with the Engineering OU adding an additional cost_center value and required team values. 
 
