@@ -1,10 +1,33 @@
+module "tag_policy" {
+  source = "../../"
 
-module "example" {
-  source = "../.."
+  name        = "standard-tag-policy"
+  description = "Standard tag policy for our organization"
 
-  name = "test"
-}
+  tag_policy = {
+    Environment = {
+      tag_key = "Environment"
+      enforced_for = [
+        "ec2:instance",
+        "s3:bucket"
+      ]
+      values = ["Production", "Staging", "Development"]
+    }
+    Project = {
+      tag_key = "Project"
+      enforced_for = [
+        "ec2:instance",
+        "s3:bucket",
+        "rds:db"
+      ]
+    }
+    Owner = {
+      tag_key = "Owner"
+      enforced_for = [
+        "*"
+      ]
+    }
+  }
 
-output "example" {
-  value = module.example
+  attach_to_org = true
 }
