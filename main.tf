@@ -59,5 +59,5 @@ resource "aws_organizations_policy_attachment" "tag_policy_attachment_org" {
   count = var.attach_to_org ? 1 : 0
 
   policy_id = aws_organizations_policy.this.id
-  target_id = data.aws_organizations_organization.org.id
+  target_id = data.aws_organizations_organization.org.roots[0].id
 }
